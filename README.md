@@ -1,6 +1,6 @@
 # snap
 
-FIXME
+Snap securely transmits secrets via self-destructing messages.
 
 ## Prerequisites
 
