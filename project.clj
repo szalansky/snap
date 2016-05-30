@@ -5,6 +5,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [compojure "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
+                 [hiccup "1.0.5"]
                  [com.taoensso/carmine "2.12.2"]
                  [lock-key "1.4.1"]]
   :plugins [[lein-ring "0.9.7"]]
