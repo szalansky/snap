@@ -22,3 +22,8 @@
   (let [stored-message (wcar* (car/get uuid))]
     (when stored-message
       (String. (cipher/decrypt (:encrypted-message stored-message) encryption-key)))))
+
+(defn destroy
+  "Destroys message by given UUID. Returns 1 if message has previously existed in storage and 0 otherwise."
+  [uuid]
+  (wcar* (car/del uuid)))
