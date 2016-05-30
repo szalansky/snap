@@ -14,3 +14,10 @@
      (car/set uuid {:encrypted-message encrypted-message}))
     uuid))
 
+(defn retrieve
+  "Retrieves and decrypts message by given UUID. Returns nil if message has not been found."
+  [uuid]
+  (let [stored-message (wcar* (car/get uuid))]
+    (when stored-message
+      (String. (cipher/decrypt (:encrypted-message stored-message) "one-two-three-is-the-key")))))
+
