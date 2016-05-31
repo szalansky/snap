@@ -17,7 +17,8 @@ Things it'd be nice to have:
 
 ## Prerequisites
 
-You will need [Leiningen][] 2.0.0 or above installed.
+You will need [Leiningen][] 2.0.0 or above installed. The application uses Redis as storage,
+so access to a Redis server is needed.
 
 [leiningen]: https://github.com/technomancy/leiningen
 
