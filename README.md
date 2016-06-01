@@ -14,6 +14,7 @@ Things it'd be nice to have:
 * enforce SSL
 * set auto-expiration time for messages
 * specify recipient of the message and send them message URL via email
+* remove mutations from `snap.message-safe` namespace - value of some vars are set when the namespace is loaded and it reads from ENV; I don't like it and would like to find some more elegant solution
 
 ## Prerequisites
 
@@ -24,9 +25,25 @@ so access to a Redis server is needed.
 
 ## Running
 
+### Web server
+
 To start a web server for the application, run:
 
-    lein ring server
+    REDIS_URL=redis://redis-url:6379 ENCRYPTION_KEY=ideally-something-generated lein ring server
+
+`REDIS_URL` specifies the URL of the Redis instance that will be used for storage.
+If you don't define this variable it will fall back to `127.0.0.1` as host and `6379` as port.
+If you only specify host it will fall back to default `6379` port.
+
+`ENCRYPTION_KEY` is mandatory and the application will throw exception while loading unless
+you define this variable. It could instead use some weak key, but I find that unfair and prefer
+to be explicit about the runtime requirements.
+
+### Tests
+
+To run tests, run:
+
+    ENCRYPTION_KEY=snap lein test
 
 ## License
 

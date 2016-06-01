@@ -6,9 +6,9 @@
   (testing "secret can be encrypted and then decrypted"
     (let [secret "text to be encrypted"
           encryption-key "one two three"]
-      (is (= (String. (-> secret
+      (is (= secret
+             (String. (-> secret
                           (encrypt secret)
-                          (decrypt secret)))
-             secret)))))
+                          (decrypt secret))))))))
 
-;; (run-tests 'snap.cipher-test)
+;; (run-tests 'snap.cipher-test) ;; uncomment for REPL-driven TDD

@@ -1,11 +1,11 @@
 (ns snap.messages-safe
   (:require [taoensso.carmine :as car :refer [wcar]]
+            [snap.config :as config]
             [snap.cipher :as cipher]))
 
-(def server-conn {:spec {:host "127.0.0.1" :port 6379}})
-(defmacro wcar* [& body] `(car/wcar server-conn ~@body))
+(defmacro wcar* [& body] `(car/wcar {:spec (config/redis-connection)} ~@body))
 
-(def encryption-key "one-two-three-is-the-key")
+(def encryption-key (config/encryption-key))
 
 (defn store
   "Encrypts and stores message under UUID key and returns the key."
