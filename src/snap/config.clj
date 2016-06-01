@@ -15,8 +15,15 @@
     {:host "127.0.0.1" :port 6379}))
 
 (defn encryption-key
-  "Fetches ENCRYPTION_KEY env variable and returns it. Raises an exception if it's not specified."
+  "Fetches ENCRYPTION_KEY env variable and returns its value. Raises an exception if it's not specified."
   []
   (if-let [password (env "ENCRYPTION_KEY")]
     password
     (throw (Exception. "No encryption key specified! Assign encryption key to ENCRYPTION_KEY env variable."))))
+
+(defn hostname
+  "Fetches HOST env variable and returns its value. Falls back to 'localhost:3000' if it is undefined."
+  []
+  (if-let [hostname (env "HOSTNAME")]
+    hostname
+    "localhost:3000"))

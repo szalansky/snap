@@ -29,7 +29,7 @@ so access to a Redis server is needed.
 
 To start a web server for the application, run:
 
-    REDIS_URL=redis://redis-url:6379 ENCRYPTION_KEY=ideally-something-generated lein ring server
+    REDIS_URL=redis://redis-url:6379 HOSTNAME=snap.mydomain.com ENCRYPTION_KEY=ideally-something-generated lein ring server
 
 `REDIS_URL` specifies the URL of the Redis instance that will be used for storage.
 If you don't define this variable it will fall back to `127.0.0.1` as host and `6379` as port.
@@ -38,6 +38,9 @@ If you only specify host it will fall back to default `6379` port.
 `ENCRYPTION_KEY` is mandatory and the application will throw exception while loading unless
 you define this variable. It could instead use some weak key, but I find that unfair and prefer
 to be explicit about the runtime requirements.
+
+`HOSTNAME` is optional and contains the name of the host (for absolute HTTP url generation).
+App will fall back to `localhost:3000` if that variable is not defined.
 
 ### Tests
 

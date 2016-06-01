@@ -21,4 +21,12 @@
     (with-redefs [env (fn [_] nil)]
       (is (thrown? Exception (encryption-key))))))
 
+(deftest retrieving-hostname
+  (testing "HOSTNAME env variable can be read"
+    (with-redefs [env (fn [_] "snap-messages")]
+      (is (= "snap-messages" (hostname)))))
+  (testing "configuration can fallback to localhost:3000"
+    (with-redefs [env (fn [_] nil)]
+      (is (= "localhost:3000" (hostname))))))
+
 ;; (run-tests 'snap.config-test) ;; uncomment for REPL-driven TDD
