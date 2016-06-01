@@ -50,4 +50,4 @@ To run tests, run:
 
 ## License
 
-Copyright © 2016 FIXME
+Copyright © 2016 MIT (see LICENSE file)
