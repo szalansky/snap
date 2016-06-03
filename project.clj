@@ -1,6 +1,6 @@
 
 (defproject snap "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
+  :description "Snap securely transmits secrets via self-destructing encrypted messages."
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.7.0"]
