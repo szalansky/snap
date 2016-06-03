@@ -7,14 +7,29 @@
 
 (def encryption-key (config/encryption-key))
 
+(defn store-persistent-message
+  "Stores message in a persistent manner (no expiration time set) under UUID key and returns the key."
+  [uuid message]
+  (wcar*
+   (car/set uuid {:encrypted-message message}))
+  uuid)
+
+(defn store-expirable-message
+  "Stores expirable message (expiration time in seconds) under UUID key and returns the key."
+  [uuid message expiration-time]
+  (wcar*
+   (car/set uuid {:encrypted-message message})
+   (car/expire expiration-time))
+  uuid)
+
 (defn store
-  "Encrypts and stores message under UUID key and returns the key."
-  [message]
+  "Encrypts and stores message under UUID key and returns the key. Depending on truthyness of persistent? message will be persistent or expirable within expiration-time seconds."
+  [message persistent? expiration-time]
   (let [uuid (str (java.util.UUID/randomUUID))
         encrypted-message (cipher/encrypt message encryption-key)]
-    (wcar*
-     (car/set uuid {:encrypted-message encrypted-message}))
-    uuid))
+    (if persistent?
+      (store-persistent-message uuid encrypted-message)
+      (store-expirable-message uuid encrypted-message expiration-time))))
 
 (defn fetch
   "Fetches and decrypts message by given UUID. Returns nil if message has not been found."
