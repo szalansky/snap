@@ -19,15 +19,15 @@
   [uuid message expiration-time]
   (wcar*
    (car/set uuid {:encrypted-message message})
-   (car/expire expiration-time))
+   (car/expire uuid expiration-time))
   uuid)
 
 (defn store
-  "Encrypts and stores message under UUID key and returns the key. Depending on truthyness of persistent? message will be persistent or expirable within expiration-time seconds."
-  [message persistent? expiration-time]
+  "Encrypts and stores message under UUID key and returns the key. If expiration-time is supplied then message will expire after number of seconds from expiration-time param."
+  [message & [expiration-time]]
   (let [uuid (str (java.util.UUID/randomUUID))
         encrypted-message (cipher/encrypt message encryption-key)]
-    (if persistent?
+    (if (nil? expiration-time)
       (store-persistent-message uuid encrypted-message)
       (store-expirable-message uuid encrypted-message expiration-time))))
 
