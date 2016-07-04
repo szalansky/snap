@@ -17,7 +17,7 @@
                [:label {:for "expiration-time"} "Expiration time:"]
                (drop-down "expiration-time" [["Never" -1 true]
                                              ["1 minute" 60]
-                                             ["5 minutes" 30]
+                                             ["5 minutes" 300]
                                              ["1 hour" 3600]
                                              ["5 hours" 18000]
                                              ["12 hours" 43200]

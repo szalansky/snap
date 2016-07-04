@@ -26,8 +26,9 @@
   "Encrypts and stores message under UUID key and returns the key. If expiration-time is supplied then message will expire after number of seconds from expiration-time param."
   [message & [expiration-time]]
   (let [uuid (str (java.util.UUID/randomUUID))
-        encrypted-message (cipher/encrypt message encryption-key)]
-    (if (nil? expiration-time)
+        encrypted-message (cipher/encrypt message encryption-key)
+        valid-time? (fn [t] (not (or (nil? t) (> (Integer/parseInt t) 0))))]
+    (if (valid-time? expiration-time)
       (store-persistent-message uuid encrypted-message)
       (store-expirable-message uuid encrypted-message expiration-time))))
 

@@ -13,6 +13,7 @@
      [:p "The message will be destroyed when it's first read so DO NOT try accessing this url before the recipient."]]]])
 
 (defn perform [req]
-  (let [message (get (:params req) :message)]
+  (let [message (get (:params req) :message)
+        expiration-time (get (:params req) :expiration-time)]
     (when message
-      (html (layout/default-bootstrap (view (messages-safe/store message)))))))
+      (html (layout/default-bootstrap (view (messages-safe/store message expiration-time)))))))
