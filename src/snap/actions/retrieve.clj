@@ -17,7 +17,7 @@
    [:div {:class "row"}
     [:div {:class "col-md-6 col-md-offset-3"}
      [:h3 "Oops!"]
-     [:p "It looks like this message is no longer available. It might be that somebody has already opened it. Please contact person you received the url from."]]]])
+     [:p "It looks like this message is no longer available. It might be that somebody has already opened it or the message has expired. Please contact person you received the url from."]]]])
 
 (defn view [message]
   (if message
